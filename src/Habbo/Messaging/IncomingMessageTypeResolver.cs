@@ -24,6 +24,16 @@ public static class MessageTypeResolver
         }
     }
 
+    public static void ReplaceResolver(int header, Type type)
+    {
+        _messageTypes[header] = type;
+    }
+    public static void ReplaceResolver<T>(int header)
+        where T : IncomingMessage
+    {
+        _messageTypes[header] = typeof(T);
+    }
+
     public static IEnumerable<IncomingMessage> Resolve(IMessage message)
     {
         string data = message.ToString();
