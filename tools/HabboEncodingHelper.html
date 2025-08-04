@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Habbo Encoding (Base64 & VL64)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    input, button {
+      padding: 6px;
+      margin: 6px 0;
+      width: 100%;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Habbo Encoding Utilities</h1>
+
+  <div class="section">
+    <h2>Base64 Encoding</h2>
+    <label>Integer Input:</label>
+    <input id="b64Int" type="number" placeholder="Enter an integer">
+    <label>Length (optional):</label>
+    <input id="b64Len" type="number" placeholder="Length (default 2)">
+    <button onclick="base64Encode()">Encode</button>
+    <p>Encoded: <span id="b64Encoded"></span></p>
+
+    <label>String Input (to encode its length):</label>
+    <input id="b64Str" type="text" placeholder="Enter a string">
+    <button onclick="base64EncodeStr()">Encode Length</button>
+    <p>Encoded: <span id="b64EncodedStr"></span></p>
+
+    <label>Base64 Encoded String (to decode):</label>
+    <input id="b64ToDecode" type="text" placeholder="e.g. AB">
+    <button onclick="base64Decode()">Decode</button>
+    <p>Decoded Integer: <span id="b64Decoded"></span></p>
+  </div>
+
+  <div class="section">
+    <h2>VL64 Encoding</h2>
+    <label>Integer Input:</label>
+    <input id="vl64Int" type="number" placeholder="Enter an integer">
+    <button onclick="vl64Encode()">Encode</button>
+    <p>Encoded: <span id="vl64Encoded"></span></p>
+
+    <label>VL64 Encoded String:</label>
+    <input id="vl64ToDecode" type="text" placeholder="Enter VL64 encoded string">
+    <button onclick="vl64Decode()">Decode</button>
+    <p>Decoded Integer: <span id="vl64Decoded"></span></p>
+  </div>
+
+  <script>
+    function base64Encode() {
+      const val = parseInt(document.getElementById('b64Int').value);
+      let len = parseInt(document.getElementById('b64Len').value);
+      if (isNaN(len)) len = 2;
+      let result = '';
+      for (let x = 1; x <= len; x++) {
+        const offset = 6 * (len - x);
+        const charCode = 64 + ((val >> offset) & 0x3f);
+        result += String.fromCharCode(charCode);
+      }
+      document.getElementById('b64Encoded').textContent = result;
+    }
+
+    function base64EncodeStr() {
+      const str = document.getElementById('b64Str').value;
+      const val = str.length;
+      let len = 2;
+      let result = '';
+      for (let x = 1; x <= len; x++) {
+        const offset = 6 * (len - x);
+        const charCode = 64 + ((val >> offset) & 0x3f);
+        result += String.fromCharCode(charCode);
+      }
+      document.getElementById('b64EncodedStr').textContent = result;
+    }
+
+    function base64Decode() {
+      const input = document.getElementById('b64ToDecode').value;
+      let total = 0;
+      let power = 0;
+      for (let i = input.length - 1; i >= 0; i--) {
+        let val = input.charCodeAt(i) - 64;
+        if (power > 0) {
+          val *= Math.pow(64, power);
+        }
+        total += val;
+        power++;
+      }
+      document.getElementById('b64Decoded').textContent = total;
+    }
+
+    function vl64Encode() {
+      let i = parseInt(document.getElementById('vl64Int').value);
+      let wf = [];
+      let pos = 0;
+      let negativeMask = i >= 0 ? 0 : 4;
+      i = Math.abs(i);
+
+      wf[pos++] = 64 + (i & 3);
+      i >>= 2;
+
+      while (i !== 0) {
+        wf[pos++] = 64 + (i & 0x3f);
+        i >>= 6;
+      }
+
+      wf[0] |= (pos << 3) | negativeMask;
+      let result = String.fromCharCode(...wf).replace(/\0/g, '');
+      document.getElementById('vl64Encoded').textContent = result;
+    }
+
+    function vl64Decode() {
+      const raw = document.getElementById('vl64ToDecode').value;
+      try {
+        let pos = 0;
+        let firstChar = raw.charCodeAt(pos);
+        let negative = (firstChar & 4) === 4;
+        let totalBytes = (firstChar >> 3) & 7;
+        let v = firstChar & 3;
+        pos++;
+        let shift = 2;
+
+        for (let b = 1; b < totalBytes; b++) {
+          v |= (raw.charCodeAt(pos++) & 0x3f) << shift;
+          shift += 6;
+        }
+
+        if (negative) v *= -1;
+        document.getElementById('vl64Decoded').textContent = v;
+      } catch {
+        document.getElementById('vl64Decoded').textContent = 'Invalid input';
+      }
+    }
+  </script>
+</body>
+</html>

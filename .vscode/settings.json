@@ -1,0 +1,25 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        ".vscode": true,
+        "bin/Debug/net8.0": true,
+        "obj": true,
+        "bin/Debug": true,
+        "bin": true,
+        "Properties": true,
+        "HostedTcpServer.csproj": true
+    },
+    "hide-files.files": [
+        ".vscode",
+        "bin/Debug/net8.0",
+        "obj",
+        "bin/Debug",
+        "bin",
+        "Properties",
+        "HostedTcpServer.csproj"
+    ]
+}
