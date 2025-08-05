@@ -26,40 +26,44 @@ The way incoming packets and outgoing packets are handled using class attributes
 ### Client
 
 
-| Category        | Completed | Remaining                               |
-| :---------------- | ----------- | :---------------------------------------- |
-| Registration    | Yes       |                                         |
-| Login           | No        | SSO                                     |
-| User Profile    | No        | Set badge                               |
-| Habbo Club      | Yes       |                                         |
-| Purse           | Yes       |                                         |
-| Messenger       | No        | Send/read, delete friend, follow friend |
-| Navigator       | Yes       |                                         |
-| Private Rooms   | No        | Entering rooms                          |
-| Public Rooms    | No        | Entering rooms                          |
-| Catalogue       | No        | Not started                             |
-| Inventory       | No        | Not started                             |
-| Recycler        | No        | Not started                             |
-| Pets            | No        | Not started                             |
-| Bots            | No        | Not started                             |
-| Trading         | No        | Not started                             |
-| Moderation      | No        | Not started                             |
-| Room events     | No        | Not started                             |
-| Battleball      | No        | Not started                             |
-| Wobble Squabble | No        | Not started                             |
-| Snowstorm       | No        | Not started                             |
-| Pool Dive       | No        | Not started                             |
-| Infobus         | No        | Not started                             |
+| Category        | Completed | Remaining      |
+| :---------------- | ----------- | :--------------- |
+| Registration    | Yes       |                |
+| Login           | No        | SSO            |
+| User Profile    | No        | Set badge      |
+| Habbo Club      | Yes       |                |
+| Purse           | Yes       |                |
+| Messenger       | No        | follow friend  |
+| Navigator       | Yes       |                |
+| Private Rooms   | No        | Entering rooms |
+| Public Rooms    | No        | Entering rooms |
+| Catalogue       | No        | Not started    |
+| Inventory       | No        | Not started    |
+| Recycler        | No        | Not started    |
+| Pets            | No        | Not started    |
+| Bots            | No        | Not started    |
+| Trading         | No        | Not started    |
+| Moderation      | No        | Not started    |
+| Room events     | No        | Not started    |
+| Battleball      | No        | Not started    |
+| Wobble Squabble | No        | Not started    |
+| Snowstorm       | No        | Not started    |
+| Pool Dive       | No        | Not started    |
+| Infobus         | No        | Not started    |
 
 ### Project
+
+
 | Category      | Completed | Remaining   |
 | :-------------- | ----------- | :------------ |
 | Plugin System | No        | Not started |
 | Housekeeping  | No        | Not started |
 
 ### Refactor
+
 When all these steps are completed, I'll take what I've learned and do a full refactor.
 
 ## Hopes and dreams
+
 I'm hoping to be able to complete this, but it will take a while for sure.
 A lot of this work is done by digging through decompiled files, and even then I have to look at other peoples emulators to really understand what's going on as the decompiled code is often just absolute junk. I actually started out by trying to understand the Debbo source and I hope I never have to look at it again.
