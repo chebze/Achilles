@@ -29,7 +29,7 @@ The way incoming packets and outgoing packets are handled using class attributes
 | Category        | Completed | Remaining      |
 | :---------------- | ----------- | :--------------- |
 | Registration    | Yes       |                |
-| Login           | No        | SSO            |
+| Login           | Yes        |             |
 | User Profile    | No        | Set badge      |
 | Habbo Club      | Yes       |                |
 | Purse           | Yes       |                |
