@@ -10,4 +10,7 @@ public class UserMessage
     public required string Message { get; set; }
 
     public DateTime SentAt { get; set; }
+
+    public bool IsRead { get; set; }
+    public DateTime? ReadAt { get; set; }
 }

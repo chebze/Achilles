@@ -3,6 +3,7 @@ using System;
 using Achilles.Database.Dialects.SQLite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Achilles.Migrations
 {
     [DbContext(typeof(HabboSqliteDbContext))]
-    partial class HabboSqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250805154611_AddedIsReadField")]
+    partial class AddedIsReadField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
