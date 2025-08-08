@@ -1,6 +1,7 @@
 using Achilles.Database.Abstractions;
 using Achilles.Database.Models;
 using Achilles.Habbo.Configuration;
+using Achilles.Habbo.Data;
 using Achilles.TCP.Abstractions;
 using Achilles.TCP.Data;
 
@@ -20,6 +21,7 @@ public class IncomingMessageContext : IDisposable
     public User? User => this.Connection.Metadata.OfType<User>().FirstOrDefault();
     public RankConfiguration? Rank => this.Configuration.Ranks.FirstOrDefault(r => r.Name == this.User?.Rank);
     public Room? Room => this.Connection.Metadata.OfType<Room>().FirstOrDefault();
+    public UserRoomState? UserRoomState => this.Connection.Metadata.OfType<UserRoomState>().FirstOrDefault();
     public ConnectionPingState PingState => this.Connection.Metadata.OfType<ConnectionPingState>().FirstOrDefault() ?? throw new Exception("No connection ping state found in connection metadata");
 
     public IncomingMessageContext(

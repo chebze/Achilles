@@ -107,4 +107,7 @@ public class IncomingMessageContent
     {
         Index += count;
     }
+
+    public bool Contains(string value) => Content.Contains(value);
+    public bool Contains(char value) => Content.Contains(value);
 }

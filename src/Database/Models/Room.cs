@@ -7,9 +7,8 @@ public enum RoomAccessType
     Password = 2
 }
 
-public class Room
+public class Room : BaseModel<int>
 {
-    public int Id { get; set; }
     public required string Name { get; set; }
     public required string Description { get; set; }
     public int MaxVisitors { get; set; } = 25;

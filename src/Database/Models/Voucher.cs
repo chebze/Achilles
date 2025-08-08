@@ -9,9 +9,8 @@ public enum VoucherType
     HabboClubMonths = 4
 }
 
-public class Voucher
+public class Voucher : BaseModel<string>
 {
-    public int Id { get; set; }
     public required string Code { get; set; }
     public required int Value { get; set; }
     public required VoucherType Type { get; set; }

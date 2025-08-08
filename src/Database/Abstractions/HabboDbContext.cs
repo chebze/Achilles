@@ -14,6 +14,7 @@ public abstract class HabboDbContext : DbContext
     public DbSet<RoomCategory> RoomCategories { get; set; }
     public DbSet<Room> Rooms { get; set; }
     public DbSet<RoomModel> RoomModels { get; set; }
+    public DbSet<RoomUserRight> RoomUserRights { get; set; }
 
     public DbSet<Voucher> Vouchers { get; set; }
 

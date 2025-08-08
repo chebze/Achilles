@@ -1,9 +1,7 @@
 namespace Achilles.Database.Models;
 
-public class UserMessage
+public class UserMessage : BaseModel<int>
 {
-    public int Id { get; set; }
-
     public required int FromUserId { get; set; }
     public required int ToUserId { get; set; }
     

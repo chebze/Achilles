@@ -7,6 +7,7 @@ using Achilles.Habbo.Messaging.Outgoing.Club;
 using Achilles.Habbo.Messaging.Outgoing.Handshake;
 using Achilles.Habbo.Messaging.Outgoing.Purse;
 using Achilles.Habbo.Messaging.Outgoing.User;
+using Achilles.Habbo.Utilities;
 using Achilles.TCP.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using static Achilles.Habbo.Messaging.Outgoing.Purse.SendCreditLogMessage;
@@ -105,7 +106,7 @@ public class RedeemVoucherMessage : IncomingMessage
                     ])
                 );
                 await ctx.Connection.SendMessageAsync(
-                    new FuseRightsMessage(ctx)
+                    new FuseRightsMessage(await UserUtilities.GetFuseRights(ctx))
                 );
                 await ctx.Connection.SendMessageAsync(
                     new AvailableBadgesMessage(ctx)

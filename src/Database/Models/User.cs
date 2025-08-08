@@ -1,8 +1,7 @@
 namespace Achilles.Database.Models;
 
-public class User
+public class User : BaseModel<int>
 {
-    public int Id { get; set; }
     public string? SSOTicket { get; set; } = null;
 
     public required string Username { get; set; }

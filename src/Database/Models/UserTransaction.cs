@@ -1,8 +1,7 @@
 namespace Achilles.Database.Models;
 
-public class UserTransaction
+public class UserTransaction : BaseModel<int>
 {
-    public int Id { get; set; }
     public required int UserId { get; set; }
     public DateOnly Date { get; set; }
     public TimeOnly Time { get; set; }

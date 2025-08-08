@@ -1,8 +1,7 @@
 namespace Achilles.Database.Models;
 
-public class RoomCategory
+public class RoomCategory : BaseModel<int>
 {
-    public int Id { get; set; }
     public int? ParentId { get; set; }
     
     public required string Name { get; set; }

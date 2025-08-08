@@ -1,3 +1,5 @@
+using Achilles.Habbo.Data;
+
 namespace Achilles.Database.Models;
 
 public enum RoomModelType
@@ -6,10 +8,16 @@ public enum RoomModelType
     UserFlatModel = 1,
     UserFlatSpecialModel = 2
 }
-
-public class RoomModel
+public enum RoomTileState
 {
-    public required string Id { get; set; }
+    Open = 0,
+    Closed = 1
+}
+
+public class RoomModel : BaseModel<string>
+{
+    public required string Name { get; set; }
+
     public required RoomModelType Type { get; set; }
 
     public required int DoorX { get; set; }
@@ -18,4 +26,6 @@ public class RoomModel
 
     public required string Heightmap { get; set; }
     public string[] HeightmapAxes => this.Heightmap.Split('|');
+
+    public Position GetDoorPosition() => new Position(this.DoorX, this.DoorY, this.DoorZ);
 }

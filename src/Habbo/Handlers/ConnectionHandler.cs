@@ -49,7 +49,7 @@ public class ConnectionHandler
         
         try
         {
-            incomingMessages.AddRange(MessageTypeResolver.Resolve(message));
+            incomingMessages.AddRange(IncomingMessageTypeResolver.Resolve(message));
         }
         catch(AggregateException ex)
         {

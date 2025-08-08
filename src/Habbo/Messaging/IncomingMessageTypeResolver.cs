@@ -6,11 +6,11 @@ using Achilles.TCP.Abstractions;
 
 namespace Achilles.Habbo.Messaging;
 
-public static class MessageTypeResolver
+public static class IncomingMessageTypeResolver
 {
     private static readonly Dictionary<int, Type> _messageTypes = new();
 
-    static MessageTypeResolver()
+    static IncomingMessageTypeResolver()
     {
         foreach (Type type in Assembly.GetExecutingAssembly().GetTypes())
         {
@@ -18,6 +18,9 @@ public static class MessageTypeResolver
             {
                 if(type.GetCustomAttribute<IncomingMessageAttribute>() is IncomingMessageAttribute attribute)
                 {
+                    if(_messageTypes.ContainsKey(attribute.Header))
+                        throw new Exception($"Duplicate incoming message header {attribute.Header} from {type.Name}");
+
                     _messageTypes.Add(attribute.Header, type);
                 }
             }

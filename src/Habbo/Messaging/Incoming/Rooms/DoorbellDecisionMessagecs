@@ -1,0 +1,48 @@
+using Achilles.Habbo.Messaging.Abstractions.Incoming;
+
+namespace Achilles.Habbo.Messaging.Incoming.Rooms;
+
+[IncomingMessage(98)]
+public class DoorbellDecisionMessage : IncomingMessage
+{
+    public string Username { get; set; }
+    public string AllowedToEnter { get; set; }
+
+    public DoorbellDecisionMessage(MessageHeader header, string content) : base(header, content)
+    {
+    }
+
+    protected override void Parse(IncomingMessageContent content)
+    {
+        this.Username = content.ReadString();
+        this.AllowedToEnter = content.ReadBase64Boolean();
+    }
+
+    public override async Task HandleAsync(IncomingMessageContext ctx)
+    {
+        if(ctx.User is null)
+            return;
+        if(ctx.Room is null)
+            return;
+
+        Room? room = await ctx.Database.Rooms.FirstOrDefaultAsync(r => r.Id == ctx.Room.Id);
+        if(room is null)
+            return;
+
+        bool hasRights = room.AllSuperUsers || room.OwnerId == ctx.User.Id || await ctx.Database.RoomUserRights.AnyAsync(r => r.RoomId == room.Id && r.UserId == ctx.User.Id);
+        if(!hasRights)
+            return;
+
+        var enteringUser = ctx.Database.Users.FirstOrDefault(u => u.Username == this.Username);
+        if(enteringUser is null)
+            return;
+
+        var enteringUserConnection = UserUtilities.GetConnection(ctx, enteringUser);
+        if(enteringUserConnection is null)
+            return;
+
+        await enteringUserConnection.SendMessageAsync(
+            this.AllowedToEnter ? new RoomEntryGrantedMessage() : new RoomEntryNotAllowedMessage()
+        );
+    }
+}

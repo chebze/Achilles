@@ -1,9 +1,7 @@
 namespace Achilles.Database.Models;
 
-public class UserFriendship
+public class UserFriendship : BaseModel<int>
 {
-    public int Id { get; set; }
-
     public required int FromUserId { get; set; }
     public required int ToUserId { get; set; }
 

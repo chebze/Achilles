@@ -1,8 +1,7 @@
 namespace Achilles.Database.Models;
 
-public class UserFavouriteRoom
+public class UserFavouriteRoom : BaseModel<int>
 {
-    public int Id { get; set; }
     public required int UserId { get; set; }
     public required int RoomId { get; set; }
 }

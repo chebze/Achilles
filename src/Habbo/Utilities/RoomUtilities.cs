@@ -25,4 +25,10 @@ public static class RoomUtilities
         return ctx.ConnectionManager.Connections
             .Where(user => user.Metadata.OfType<Room>().FirstOrDefault() is Room userRoom && userRoom.Id == room.Id);
     }
+    public static IEnumerable<(User User, IConnection Connection)> GetUserConnectionsInRoom(IncomingMessageContext ctx, Room room)
+    {
+        return ctx.ConnectionManager.Connections
+            .Where(c => c.Metadata.OfType<Room>().FirstOrDefault() is Room userRoom && userRoom.Id == room.Id)
+            .Select(c => (c.Metadata.OfType<User>().First(), c));
+    }
 }
